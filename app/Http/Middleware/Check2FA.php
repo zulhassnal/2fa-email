@@ -17,6 +17,7 @@ class Check2FA
     public function handle(Request $request, Closure $next): Response
     {
         if (!Session::has('user_2fa')) {
+            auth()->user()->generateCode();
             return redirect()->route('2fa.index');
         }
 
